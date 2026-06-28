@@ -40,9 +40,10 @@ settle   →  operator pays the provider from the Pool, burns the nullifier (on-
   client). Tools: `create_wallet`, `deposit`, `pay`. The agent pays x402 APIs
   privately — only a nullifier is revealed.
 - **Groq autonomous demo**: a Groq LLM, given those tools, **autonomously**
-  creates a wallet, deposits a note, and pays an x402 endpoint — then answers.
-  Real run: deposit tx `d29336cc…`, `200 OK · X-Privacy=zk-groth16`, and the
-  agent reports the price it paid for — privately.
+  creates a wallet, deposits a 1-XLM note, and pays an x402 endpoint — the gateway
+  verifies **and settles on-chain** (1 XLM → provider, nullifier spent) — then the
+  agent answers. Real run: deposit `0ad8a311…`, settle `3969f955…`, `200 OK ·
+  X-Privacy=zk-groth16`. Real value moves agent → pool → provider, privately.
 - **Dashboard** generates a **real Groth16 proof in the browser** (snarkjs) and
   verifies it on the deployed Stellar verifier (`/api/verify` → `valid:true`).
 
