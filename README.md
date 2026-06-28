@@ -30,8 +30,21 @@ settle   →  operator pays the provider from the Pool, burns the nullifier (on-
 | [`null-402-circuits`](https://github.com/shinothelegend/null-402-circuits) | Circom Groth16 payment circuit |
 | [`null-402-gateway`](https://github.com/shinothelegend/null-402-gateway) | Reference edge gateway (Hono) |
 | [`null-402-dashboard`](https://github.com/shinothelegend/null-402-dashboard) | Public-vs-private demo UI |
-| [`null-402-examples`](https://github.com/shinothelegend/null-402-examples) | **Agentic demo** + full e2e demo |
+| [`null-402-mcp`](https://github.com/shinothelegend/null-402-mcp) | **MCP server** — any agent (Claude, …) pays privately; + Groq autonomous demo |
+| [`null-402-examples`](https://github.com/shinothelegend/null-402-examples) | Agentic on-chain demo + full e2e demo |
 | [`null-402-landing`](https://github.com/shinothelegend/null-402-landing) · [`null-402-docs`](https://github.com/shinothelegend/null-402-docs) | Landing + docs |
+
+## Agentic — pay privately from any agent
+
+- **MCP server** (`null-402-mcp`): plug into Claude Desktop / Code (or any MCP
+  client). Tools: `create_wallet`, `deposit`, `pay`. The agent pays x402 APIs
+  privately — only a nullifier is revealed.
+- **Groq autonomous demo**: a Groq LLM, given those tools, **autonomously**
+  creates a wallet, deposits a note, and pays an x402 endpoint — then answers.
+  Real run: deposit tx `d29336cc…`, `200 OK · X-Privacy=zk-groth16`, and the
+  agent reports the price it paid for — privately.
+- **Dashboard** generates a **real Groth16 proof in the browser** (snarkjs) and
+  verifies it on the deployed Stellar verifier (`/api/verify` → `valid:true`).
 
 ## Deployed on Stellar testnet
 
