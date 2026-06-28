@@ -96,12 +96,22 @@ constraints). Chosen for the cheapest on-chain verification (runs per call),
 smallest proofs, battle-tested browser/Node proving (snarkjs), and the most
 mature Stellar host-function support.
 
-## Privacy model (honest)
+## Privacy model
 
-A **Privacy-Pool** design: deposits are public; **payments and settlements reveal
-nothing about which agent paid**. The settle txn shows only a nullifier, not
-linkable to a deposit. Practical privacy scales with the number of pool deposits
-(the anonymity set).
+A **Privacy-Pool** design. All deposits share **one Poseidon Merkle tree**, so
+every payment proves membership in the same tree and every settlement references
+the **same root** — only a nullifier distinguishes spends, and a nullifier can't
+be linked to a deposit. So settlements are **unlinkable across all deposits**: the
+anonymity set is the number of deposits. Deposits themselves are public (like any
+pool).
+
+Verified: `node anonymity.mjs` deposits two notes and shows both proving against
+**one shared root** on-chain — real unlinkability, not per-note trees.
+
+The gateway accepts only proofs whose root equals the **actual on-chain commitment
+tree** (computed off-chain, since Stellar has no Poseidon host fn yet — auditable;
+the one remaining trust assumption, and the only thing standing between this and
+fully-trustless).
 
 ## Run the whole thing
 
